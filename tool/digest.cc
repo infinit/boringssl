@@ -36,8 +36,10 @@ OPENSSL_MSVC_PRAGMA(warning(push, 3))
 #include <windows.h>
 OPENSSL_MSVC_PRAGMA(warning(pop))
 #include <io.h>
+#ifndef __MINGW32__
 #define PATH_MAX MAX_PATH
 typedef int ssize_t;
+#endif
 #endif
 
 #include <openssl/digest.h>

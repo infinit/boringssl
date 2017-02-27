@@ -442,9 +442,9 @@ static bool TestQuotient(FileTest *t, BN_CTX *ctx) {
     }
     BN_ULONG ret_word = BN_div_word(ret.get(), b_word);
     if (ret_word != remainder_word) {
-      t->PrintLine("Got A %% B (word) = " BN_HEX_FMT1 ", wanted " BN_HEX_FMT1
+      t->PrintLine("Got A %% B (word) = " "%lu" ", wanted " "%lu"
                    "\n",
-                   ret_word, remainder_word);
+                   (long unsigned int)ret_word, (long unsigned int)remainder_word);
       return false;
     }
     if (!ExpectBIGNUMsEqual(t, "A / B (word)", quotient.get(), ret.get())) {
@@ -453,9 +453,9 @@ static bool TestQuotient(FileTest *t, BN_CTX *ctx) {
 
     ret_word = BN_mod_word(a.get(), b_word);
     if (ret_word != remainder_word) {
-      t->PrintLine("Got A %% B (word) = " BN_HEX_FMT1 ", wanted " BN_HEX_FMT1
+      t->PrintLine("Got A %% B (word) = " "%lu" ", wanted " "%lu"
                    "\n",
-                   ret_word, remainder_word);
+                   (long unsigned int)ret_word, (long unsigned int)remainder_word);
       return false;
     }
   }

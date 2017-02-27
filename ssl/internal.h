@@ -2182,4 +2182,6 @@ void ssl_reset_error_state(SSL *ssl);
 } /* extern C */
 #endif
 
+// under mingw wincrypt.h defines X509_NAME to '(LPCSTR)7'
+#undef X509_NAME
 #endif /* OPENSSL_HEADER_SSL_INTERNAL_H */

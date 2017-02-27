@@ -59,6 +59,12 @@
 #include <errno.h>
 #include <string.h>
 
+#include <openssl/buf.h>
+#include <openssl/err.h>
+#include <openssl/mem.h>
+
+#include "internal.h"
+
 #if !defined(OPENSSL_WINDOWS)
 #include <unistd.h>
 #else
@@ -68,11 +74,6 @@ OPENSSL_MSVC_PRAGMA(warning(push, 3))
 OPENSSL_MSVC_PRAGMA(warning(pop))
 #endif
 
-#include <openssl/buf.h>
-#include <openssl/err.h>
-#include <openssl/mem.h>
-
-#include "internal.h"
 
 
 static int bio_fd_non_fatal_error(int err) {

@@ -605,4 +605,6 @@ static inline void *OPENSSL_memset(void *dst, int c, size_t n) {
 }  /* extern C */
 #endif
 
+// wincrypt.h on mingw defines X509_NAME
+#undef X509_NAME
 #endif  /* OPENSSL_HEADER_CRYPTO_INTERNAL_H */

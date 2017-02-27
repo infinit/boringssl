@@ -1386,9 +1386,9 @@ static bool TestSequenceNumber(bool is_dtls, const SSL_METHOD *method,
 
   // Drain any post-handshake messages to ensure there are no unread records
   // on either end.
-  uint8_t byte = 0;
-  if (SSL_read(client.get(), &byte, 1) > 0 ||
-      SSL_read(server.get(), &byte, 1) > 0) {
+  uint8_t abyte = 0;
+  if (SSL_read(client.get(), &abyte, 1) > 0 ||
+      SSL_read(server.get(), &abyte, 1) > 0) {
     fprintf(stderr, "Received unexpected data.\n");
     return false;
   }
@@ -1424,8 +1424,8 @@ static bool TestSequenceNumber(bool is_dtls, const SSL_METHOD *method,
   }
 
   // Send a record from client to server.
-  if (SSL_write(client.get(), &byte, 1) != 1 ||
-      SSL_read(server.get(), &byte, 1) != 1) {
+  if (SSL_write(client.get(), &abyte, 1) != 1 ||
+      SSL_read(server.get(), &abyte, 1) != 1) {
     fprintf(stderr, "Could not send byte.\n");
     return false;
   }
@@ -1476,8 +1476,8 @@ static bool TestOneSidedShutdown(bool is_dtls, const SSL_METHOD *method,
   }
 
   // Reading from the server should consume the EOF.
-  uint8_t byte;
-  if (SSL_read(server.get(), &byte, 1) != 0 ||
+  uint8_t abyte;
+  if (SSL_read(server.get(), &abyte, 1) != 0 ||
       SSL_get_error(server.get(), 0) != SSL_ERROR_ZERO_RETURN) {
     fprintf(stderr, "Connection was not shut down cleanly.\n");
     return false;
@@ -1485,10 +1485,10 @@ static bool TestOneSidedShutdown(bool is_dtls, const SSL_METHOD *method,
 
   // However, the server may continue to write data and then shut down the
   // connection.
-  byte = 42;
-  if (SSL_write(server.get(), &byte, 1) != 1 ||
-      SSL_read(client.get(), &byte, 1) != 1 ||
-      byte != 42) {
+  abyte = 42;
+  if (SSL_write(server.get(), &abyte, 1) != 1 ||
+      SSL_read(client.get(), &abyte, 1) != 1 ||
+      abyte != 42) {
     fprintf(stderr, "Could not send byte.\n");
     return false;
   }

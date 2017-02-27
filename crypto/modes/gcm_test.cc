@@ -286,8 +286,8 @@ static int decode_hex(uint8_t **out, size_t *out_len, const char *in,
     uint8_t v, v2;
     if (!from_hex(&v, in[i]) ||
         !from_hex(&v2, in[i+1])) {
-      fprintf(stderr, "%u: invalid hex digit in %s around offset %zu.\n",
-              test_num, description, i);
+      fprintf(stderr, "%u: invalid hex digit in %s around offset %lu.\n",
+              test_num, description, (long unsigned int)i);
       goto err;
     }
     buf[i/2] = (v << 4) | v2;

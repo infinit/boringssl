@@ -176,6 +176,10 @@ if(NOT MSVC AND NOT ANDROID)
   target_link_libraries(crypto pthread)
 endif()
 
+if(WIN32)
+  target_link_libraries(crypto ws2_32)
+endif()
+
 add_executable(
   constant_time_test
 
